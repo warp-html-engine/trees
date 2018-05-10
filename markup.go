@@ -56,7 +56,7 @@ func NewText(txt string, dl ...interface{}) *Markup {
 // an error tag with the contents of the error.
 func MarkdownTemplate(tml string, bind interface{}) *Markup {
 	processed, err := Templated(tml, bind, func(in string) string {
-		return string(blackfriday.MarkdownCommon([]byte(in)))
+		return string(blackfriday.Run([]byte(in), blackfriday.WithExtensions(blackfriday.CommonExtensions)))
 	})
 
 	// if error occured, return a <error> tag with error details.
